@@ -16,6 +16,10 @@ body {
   width: 50%;
   height: 100%;
 }
+.simple-editor__editor__textarea {
+  height: 100%;
+  width: 99%;
+}
 .simple-editor__viewer {
   float: right;
   width: 50%;
