@@ -112,7 +112,7 @@ impl Component for Model {
                 self.version = version;
                 self.viewer_text = text;
                 self.change_text_timeout = Some(TimeoutService::spawn(
-                    Duration::from_secs(1),
+                    Duration::from_millis(300),
                     self.link.callback(move |_| Msg::ParseRequestText(version)),
                 ));
                 false

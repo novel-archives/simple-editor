@@ -1,6 +1,7 @@
 .envrc
 target/
 node_modules/
+dist/
 
 # Added by cargo
 #
