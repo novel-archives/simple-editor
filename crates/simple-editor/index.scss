@@ -23,5 +23,9 @@ body {
 		float: right;
 		width: 50%;
 		height: 100%;
+		&__emphasis_mark {
+			-webkit-text-emphasis: dot;
+			text-emphasis: dot;
+		}
 	}
 }

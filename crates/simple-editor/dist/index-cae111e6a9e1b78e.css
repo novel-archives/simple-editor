@@ -25,3 +25,7 @@ body {
   width: 50%;
   height: 100%;
 }
+.simple-editor__viewer__emphasis_mark {
+  -webkit-text-emphasis: dot;
+  text-emphasis: dot;
+}

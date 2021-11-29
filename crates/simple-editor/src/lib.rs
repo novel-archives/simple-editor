@@ -29,6 +29,7 @@ impl Model {
             ParsedToken::Plaintext(span) => self.view_plaintext(span),
             ParsedToken::Space(span) => self.view_space(span),
             ParsedToken::NewLine(span) => self.view_newline(span),
+            ParsedToken::EmphasisMark(span) => self.view_emphasis_mark(span),
             ParsedToken::Ignore(_) => {
                 panic!("unexpected token")
             }
@@ -40,14 +41,19 @@ impl Model {
             }
         }
     }
+    fn view_emphasis_mark(&self, span: ParsedSpan) -> VNode {
+        html! {
+            <span class="simple-editor__viewer__emphasis_mark">{span.fragment()}</span>
+        }
+    }
     fn view_plaintext(&self, span: ParsedSpan) -> VNode {
         html! {
-            <span>{span.fragment()}</span>
+            {span.fragment()}
         }
     }
     fn view_space(&self, span: ParsedSpan) -> VNode {
         html! {
-            <span>{span.fragment()}</span>
+            {span.fragment()}
         }
     }
     fn view_newline(&self, _: ParsedSpan) -> VNode {
