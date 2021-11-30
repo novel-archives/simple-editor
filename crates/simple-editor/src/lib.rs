@@ -1,3 +1,7 @@
+#[macro_use]
+extern crate derive_new;
+
+use novel_archives_text::parser::token::iterator::TextIterator;
 use novel_archives_text::parser::token::{ParsedSpan, ParsedToken};
 use std::collections::BTreeMap;
 use std::sync::Arc;
@@ -123,9 +127,12 @@ impl Component for Model {
                         self.ctx.clone(),
                         token::ParsedSpan::new(&self.viewer_text),
                     );
-                    let nodes: Vec<_> = iter
-                        .filter(|token| !matches!(token, ParsedToken::Ignore(_)))
-                        .map(|token| self.view_token(token))
+                    let iter = LineTextIterator::new(iter);
+                    let nodes: Vec<_> = iter.into_iter()
+                        .enumerate()
+                        .map(|(index, tokens)| html!{
+                            <p id={format!("L{}",index+1)} class="simple-editor__viewer__line" >{tokens.into_iter().map(|token|self.view_token(token)).collect::<Vec<VNode>>()}</p>
+                        })
                         .collect();
                     self.viewer_nodes = nodes;
                     true
@@ -148,6 +155,33 @@ impl Component for Model {
                     {self.viewer_nodes.clone()}
                 </div>
             </div>
+        }
+    }
+}
+
+#[derive(new)]
+struct LineTextIterator<'a> {
+    iter: TextIterator<'a>,
+}
+
+impl<'a> Iterator for LineTextIterator<'a> {
+    type Item = Vec<ParsedToken<'a>>;
+    fn next(&mut self) -> std::option::Option<<Self as std::iter::Iterator>::Item> {
+        let mut tokens = vec![];
+        for token in &mut self.iter {
+            if matches!(token, ParsedToken::NewLine(_)) {
+                if tokens.is_empty() {
+                    tokens.push(token);
+                }
+                break;
+            } else if !matches!(token, ParsedToken::Ignore(_)) {
+                tokens.push(token);
+            }
+        }
+        if !tokens.is_empty() {
+            Some(tokens)
+        } else {
+            None
         }
     }
 }

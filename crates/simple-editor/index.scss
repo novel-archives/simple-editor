@@ -18,15 +18,30 @@ body {
 		background-color: #1e1e1e;
 		color: #e8e8d4;
 		border: none;
-		font-size: 18px;
+		font-size: 16px;
+		line-height: 28.8px;
+		direction: ltr;
+		unicode-bidi: bidi-override;
 	}
 	&__viewer {
 		min-height: calc(100vh - 50px);
 		width: 50%;
-		padding: 1rem;
 		box-sizing: border-box;
 		font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体",
 			"ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+		font-size: 16px;
+		text-align: left;
+		line-height: 28.8px;
+		word-wrap: break-word;
+		word-break: normal !important;
+		display: table;
+		&__line {
+			margin: 0;
+			padding: 0;
+			vertical-align: baseline;
+			direction: ltr;
+			unicode-bidi: bidi-override;
+		}
 		&__emphasis_mark {
 			-webkit-text-emphasis: dot;
 			text-emphasis: dot;

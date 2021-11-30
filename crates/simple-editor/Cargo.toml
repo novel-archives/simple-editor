@@ -11,3 +11,4 @@ crate-type = ["cdylib", "rlib"]
 yew = "0.18"
 wasm-bindgen = "0.2"
 novel-archives-text = { git = "https://github.com/novel-archives/novel-archives-text" }
+derive-new = "0.5.9"
