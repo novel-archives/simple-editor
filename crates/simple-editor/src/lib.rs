@@ -143,9 +143,7 @@ impl Component for Model {
     fn view(&self) -> Html {
         html! {
             <div class="simple-editor">
-                <div class="simple-editor__editor">
-                    <textarea class="simple-editor__editor__textarea"  oninput={self.link.callback(|e:InputData| Msg::ChangeText(e.value))} />
-                </div>
+                <textarea class="simple-editor__editor"  oninput={self.link.callback(|e:InputData| Msg::ChangeText(e.value))} />
                 <div class="simple-editor__viewer">
                     {self.viewer_nodes.clone()}
                 </div>
